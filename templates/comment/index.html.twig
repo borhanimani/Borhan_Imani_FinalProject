@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comments{% endblock %}
+
+{% block body %}
+    <div class="title-box">
+        <h1 class="title">Comments</h1>
+        <a class="create-btn" href="{{ path('app_comment_new') }}">Create new</a>
+    </div>
+    <div class="product-list-box">
+        {% for comment in comments %}
+            <div class="product-box">
+                <div>
+                    <h3>{{ comment.userid.name }}</h3>
+                    <h3>{{ comment.usertext }}</h3>
+                </div>
+                <div style=" margin-bottom:30px ;width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: center">
+                    <div style="border: solid #3b82f6 1px; border-radius: 5px; height: 20px; ">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="normal-title" href="{{ path('app_comment_show', {'id': comment.id}) }}">show</a>
+                            <a class="normal-title" href="{{ path('app_comment_edit', {'id': comment.id}) }}">edit</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div style="margin: 30px"><h2> no records found</h2></div>
+        {% endfor %}
+    </div>
+{% endblock %}

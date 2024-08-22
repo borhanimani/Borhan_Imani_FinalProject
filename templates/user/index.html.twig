@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <div class="title-box">
+        <h1 class="title">Users</h1>
+        <a class="create-btn" href="{{ path('app_product_new') }}">Create new</a>
+    </div>
+    <div class="product-list-box">
+        {% for user in users %}
+            <div class="product-box-sysinfo">
+                <div>
+                    <h4>ID: {{ user.id }}</h4>
+                    <h4>Email: {{ user.email }}</h4>
+                    <h4>name: {{ user.name }}</h4>
+                    <h4>Password: hidden</h4>
+                </div>
+                <div style=" margin-bottom:30px ;width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: center">
+                    <div style="border: solid #3b82f6 1px; border-radius: 5px; height: 20px; ">
+                        <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                        <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div style="margin: 30px"><h2> no records found</h2></div>
+        {% endfor %}
+    </div>
+{% endblock %}

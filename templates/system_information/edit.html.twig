@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit SystemInformation{% endblock %}
+
+{% block body %}
+    <h1>Edit SystemInformation</h1>
+
+    {{ include('system_information/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_system_information_index') }}">back to list</a>
+
+    {{ include('system_information/_delete_form.html.twig') }}
+{% endblock %}

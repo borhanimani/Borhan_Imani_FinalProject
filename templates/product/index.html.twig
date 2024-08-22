@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block  title %}Home{% endblock %}
+
+{% block body %}
+    <div class="title-box">
+        <h1 class="title">Home</h1>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a class="create-btn" href="{{ path('app_product_new') }}">Create new</a>
+        {% endif %}
+
+    </div>
+    <div class="product-list-box">
+        {% for product in products %}
+            <div class="product-box">
+                <div>
+                    <h2>{{ product.name }}</h2>
+                    <h5>{{ product.moredetails }} ...</h5>
+                </div>
+                {# <div>{{ product.systeminformation}}</div> #}
+                <h3> Price: {{ product.price }}$</h3>
+                <div style=" margin-bottom:30px ;width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: center">
+                    <div style="border: solid #3b82f6 1px; border-radius: 5px; height: 20px; ">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="normal-title" href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
+                            <a class="normal-title" href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
+                        {% endif %}
+
+                    </div>
+                    <a class="buy-btn" href="{{ path('app_product_buy', {'id': product.id}) }}">buy</a>
+                </div>
+            </div>
+        {% else %}
+            <div style="margin: 30px"><h2> no records found</h2></div>
+        {% endfor %}
+    </div>
+{% endblock %}

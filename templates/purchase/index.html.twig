@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Purchase index{% endblock %}
+
+{% block body %}
+
+
+    <div class="title-box">
+        <h1 class="title">Users</h1>
+        <a class="create-btn" href="{{ path('app_purchase_new') }}">Sale List</a>
+    </div>
+    <div class="product-list-box">
+        {% for purchase in purchases %}
+            <div class="product-box-sysinfo">
+                <div>
+                    <h4>ID: {{ purchase.id }}</h4>
+                    <h4>UserID: {{ purchase.userid.id }}</h4>
+                    <h4>Username: {{ purchase.userid.email }}</h4>
+                    <h4>ProductID: {{ purchase.productid.id }}</h4>
+                    <h4>Product Name: {{ purchase.productid.name }}</h4>
+                </div>
+                <div style=" margin-bottom:30px ;width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: center">
+                    <div style="border: solid #3b82f6 1px; border-radius: 5px; height: 20px; ">
+                        <a href="{{ path('app_purchase_show', {'id': purchase.id}) }}">show</a>
+                        <a href="{{ path('app_purchase_edit', {'id': purchase.id}) }}">edit</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div style="margin: 30px"><h2> no records found</h2></div>
+        {% endfor %}
+    </div>
+
+
+    <h1>Purchase index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>Product ID</th>
+                <th>Product Name</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for purchase in purchases %}
+            <tr>
+                <td>{{ purchase.id }}</td>
+                <td>{{ purchase.userid.id }}</td>
+                <td>{{ purchase.userid.email }}</td>
+                <td>{{ purchase.productid.id }}</td>
+                <td>{{ purchase.productid.name }}</td>
+                <td>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_purchase_new') }}">Create new</a>
+{% endblock %}

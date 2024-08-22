@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SystemInformation index{% endblock %}
+
+{% block body %}
+    <div class="title-box">
+        <h1 class="title">System Information List</h1>
+            <a class="create-btn" href="{{ path('app_system_information_new') }}">Create new</a>
+    </div>
+    <div class="product-list-box">
+        {% for system_information in system_informations %}
+            <div class="product-box-sysinfo">
+                <div>
+                    <h4>Ram: {{ system_information.ram }}GB</h4>
+                    <h4>CPU: {{ system_information.cpu }}</h4>
+                    <h4>HardDisk: {{ system_information.hard }}GB/TB</h4>
+                    <h4>SSD: {{ system_information.ssd }}GB/TB</h4>
+                    <h4>GPU: {{ system_information.gpu }}</h4>
+                </div>
+                <div style=" margin-bottom:30px ;width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: center">
+                    <div style="border: solid #3b82f6 1px; border-radius: 5px; height: 20px; ">
+                        <a href="{{ path('app_system_information_show', {'id': system_information.id}) }}">show</a>
+                        <a href="{{ path('app_system_information_edit', {'id': system_information.id}) }}">edit</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div style="margin: 30px"><h2> no records found</h2></div>
+        {% endfor %}
+    </div>
+{% endblock %}
